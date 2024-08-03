@@ -18,6 +18,7 @@ import {
 import { CardWrapper } from "./card-wrapper";
 import { resolve } from "path";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export const LoginForm = () => { //we do not export default because we are just exporting a single component not a page.
     const form = useForm<z.infer<typeof LoginSchema>>({
@@ -57,7 +58,28 @@ export const LoginForm = () => { //we do not export default because we are just 
                                 <FormMessage />
                             </FormItem>
                         )} />
+                          <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        placeholder="******"
+                                        type="password"
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )} />
                     </div>
+                    <Button
+                    type="submit"
+                    className="w-full">
+                        Login
+                    </Button>
                 </form>
              </Form>
         </CardWrapper>
