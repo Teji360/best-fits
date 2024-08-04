@@ -19,6 +19,8 @@ import { CardWrapper } from "./card-wrapper";
 import { resolve } from "path";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { FormError } from "../ui/form-error";
+import { FormSuccess } from "../ui/form-success";
 
 export const LoginForm = () => { //we do not export default because we are just exporting a single component not a page.
     const form = useForm<z.infer<typeof LoginSchema>>({
@@ -29,6 +31,13 @@ export const LoginForm = () => { //we do not export default because we are just 
         },
     })
     
+    //this is the wrapper that passes in the validated values
+    const onSubmit = (values:z.infer<typeof LoginSchema>) => {
+        console.log(values);
+    }
+    
+    //Server actions pass things from the client to the server. Pretty cool? right?
+    
     return (
         <CardWrapper
             headerLabel="Welcome Back"
@@ -38,7 +47,7 @@ export const LoginForm = () => { //we do not export default because we are just 
             >
              <Form {...form}>
                 <form 
-                onSubmit={form.handleSubmit(() => {})}
+                onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-6"
                 >
                     <div className="space-y-4">
@@ -75,6 +84,9 @@ export const LoginForm = () => { //we do not export default because we are just 
                             </FormItem>
                         )} />
                     </div>
+                     {/* Only one of these will be loaded*/}
+                    <FormError message="" />
+                    <FormSuccess message="" />
                     <Button
                     type="submit"
                     className="w-full">
