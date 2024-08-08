@@ -6,6 +6,8 @@ import { db } from "@/lib/db"
 export const {
     handlers: { GET, POST },
     auth, //get current session or not seesion at all if the user is logged out
+    signIn,
+    signOut
 } = NextAuth({
     adapter: PrismaAdapter(db),
     session: { strategy: "jwt" },
